@@ -1,0 +1,22 @@
+{
+  "name": "react-workshop-api",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -e ts --exec \"ts-node dev.ts\"",
+    "format": "prettier --write \"**\""
+  },
+  "private": true,
+  "dependencies": {
+    "@types/graphql": "^14.2.2",
+    "@types/micro": "^7.3.3",
+    "apollo-server-micro": "^2.6.1",
+    "graphql": "^14.3.1",
+    "nodemon": "^1.19.2",
+    "micro": "^9.3.4",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  }
+}
