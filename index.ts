@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import data from './data.json';
 
 type Id = {
   id: string;
@@ -7,6 +8,7 @@ type Id = {
 type Beverage = {
   id: number;
   name: string;
+  category: string;
   price: number;
   img: string;
 };
@@ -15,6 +17,7 @@ const typeDefs = gql`
   type Beverage {
     id: Int!
     name: String!
+    category: String!
     price: Int!
     img: String!
   }
@@ -25,48 +28,11 @@ const typeDefs = gql`
   }
 `;
 
-let beverages: Beverage[] = [
-  {
-    id: 1,
-    name: 'Nøgne Ø Imperial Stout',
-    price: 80,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/1053802-1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Kronenbourg 1664 Blanc',
-    price: 40,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/1793702-1.jpg',
-  },
-  {
-    id: 3,
-    name: 'Nøgne Ø Dark Horizon 5',
-    price: 250,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/6975202-1.jpg',
-  },
-  {
-    id: 4,
-    name: 'Brugse Zot Blond',
-    price: 49,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/5233102-1.jpg',
-  },
-  {
-    id: 5,
-    name: 'Brugse Zot Dubbel',
-    price: 53,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/6977002-1.jpg',
-  },
-  {
-    id: 6,
-    name: 'By The Horns Samba King Rye Ale',
-    price: 55,
-    img: 'https://bilder.vinmonopolet.no/cache/300x300-0/6989002-1.jpg',
-  },
-];
+const beverages: Beverage[] = data;
 
 const resolvers = {
   Query: {
-    beverage: async (_: any, { id }: Id): Promise<Beverage> => {
+    beverage: async (_: any, { id }: Id): Promise<Beverage | undefined> => {
       return beverages.find(beverage => beverage.id === parseInt(id));
     },
     beverages: async (): Promise<Beverage[]> => {
